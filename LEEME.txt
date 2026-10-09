@@ -1,0 +1,7 @@
+FOOTBALL UNIVERSE
+
+1. Extrae la carpeta football-universe.
+2. Abre index.html en un navegador para jugar.
+3. La partida se guarda en el almacenamiento local del navegador.
+
+Incluye 5 ligas, 100 clubes, ascensos/descensos, copas eliminatorias y mundial.

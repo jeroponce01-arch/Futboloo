@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101a2b">
+<title>Football Universe</title>
+<style>
+:root{--bg:#0b1220;--panel:#121d30;--panel2:#18263d;--line:#2a3a54;--text:#edf3fc;--muted:#9aabc3;--green:#42d392;--gold:#f5c768;--red:#ff6f79;--blue:#75a7ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#152641 0,#0b1220 55%);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:#20314c;color:var(--text);padding:10px 13px;border-radius:11px;font-weight:650}button:hover{filter:brightness(1.13)}button.primary{background:var(--green);border-color:var(--green);color:#071a12}button.ghost{background:transparent}button.danger{color:var(--red)}button:disabled{opacity:.4;cursor:not-allowed}
+header{padding:22px 18px 16px;max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.brand{display:flex;gap:12px;align-items:center}.ball{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#42d392,#1e8e69);display:grid;place-items:center;font-size:25px;box-shadow:0 8px 25px #42d39230}.brand h1{font-size:22px;margin:0;letter-spacing:-.6px}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+main{max-width:1200px;margin:auto;padding:0 18px 40px}.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:15px}
+.card{background:linear-gradient(145deg,#152238ed,#111b2ded);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 10px 35px #00000012}.season-label{color:var(--green);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.hero h2{font-size:26px;line-height:1.12;margin:8px 0}.hero p{color:var(--muted);margin:0 0 16px}.hero-buttons{display:flex;gap:8px;flex-wrap:wrap}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:#0d1728;border:1px solid #263751;border-radius:13px;padding:13px}.stat span{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:23px;margin-top:2px}
+.tabs{display:flex;gap:7px;overflow-x:auto;padding:4px 0 14px;scrollbar-width:thin}.tab{white-space:nowrap;background:#111b2d;color:var(--muted)}.tab.active{background:var(--green);color:#071a12;border-color:var(--green)}
+.content{min-height:400px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}.section-head h2{margin:0;font-size:20px}.section-head p{color:var(--muted);font-size:13px;margin:3px 0 0}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select,input{background:#0b1525;border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--text);max-width:100%}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:13px}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:13px}th{text-align:right;color:var(--muted);background:#0d1728;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:11px 10px}td{padding:10px;border-top:1px solid #24334a;text-align:right}th:first-child,td:first-child{text-align:left}td.team{font-weight:650;min-width:170px}tr.zone td:first-child{border-left:3px solid var(--green)}tr.relegation td:first-child{border-left:3px solid var(--red)}.pos{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#20314b;color:var(--muted);font-size:11px;margin-right:7px}.pill{display:inline-block;border-radius:20px;padding:3px 8px;font-size:11px;background:#1d3550;color:#b9d5ff}.pill.green{background:#143b31;color:var(--green)}.pill.red{background:#3c202b;color:var(--red)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.list{display:grid;gap:9px}.item{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#0d1728;border:1px solid #263751;border-radius:12px;padding:12px}.item small{display:block;color:var(--muted)}.score{font-size:18px;font-weight:800;white-space:nowrap}.fixture-list{display:grid;gap:8px}.fixture{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;background:#0d1728;border:1px solid #263751;border-radius:11px;padding:12px}.fixture .home{text-align:right}.fixture .away{text-align:left}.fixture .mid{text-align:center;color:var(--muted);font-size:12px}.fixture b{font-size:13px}.empty{padding:30px;text-align:center;color:var(--muted)}.note{font-size:12px;color:var(--muted);margin-top:12px}.cup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cup-card{background:#0d1728;border:1px solid #2b3c56;border-radius:15px;padding:15px}.cup-card .cup-icon{font-size:24px}.cup-card h3{margin:8px 0 3px}.cup-card p{margin:0 0 12px;color:var(--muted);font-size:12px}.history-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #263751}.champion{color:var(--gold);font-weight:800}.small{font-size:12px;color:var(--muted)}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#e9f7f0;color:#08251a;padding:12px 18px;border-radius:12px;font-weight:700;box-shadow:0 8px 30px #0008;z-index:5;max-width:90vw}
+footer{text-align:center;color:#687b96;font-size:11px;padding:15px}
+@media(max-width:700px){header{padding:17px 13px 12px}main{padding:0 12px 28px}.hero{grid-template-columns:1fr}.hero h2{font-size:23px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.stat{padding:10px 8px}.stat strong{font-size:18px}.stat span{font-size:10px}.grid2{grid-template-columns:1fr}.cup-grid{grid-template-columns:1fr}.card{padding:14px}.fixture{gap:6px;padding:10px}.fixture b{font-size:12px}.fixture .mid{font-size:11px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="ball">⚽</div><div><h1>Football Universe</h1><p>Tu mundo. Tus clubes. Tu historia.</p></div></div>
+  <div class="top-actions"><button class="ghost" id="saveBtn">Guardar partida</button><button class="ghost" id="resetBtn">Nueva partida</button></div>
+</header>
+<main>
+  <section class="hero">
+    <div class="card">
+      <div class="season-label" id="seasonLabel">Temporada 2026</div>
+      <h2 id="heroTitle">Construí una dinastía.</h2>
+      <p id="heroText">Simulá temporadas, ganá copas y llevá a tus clubes a la gloria.</p>
+      <div class="hero-buttons"><button class="primary" id="advanceBtn">Simular próxima fecha</button><button id="seasonBtn">Simular temporada completa</button></div>
+    </div>
+    <div class="card"><div class="stats">
+      <div class="stat"><span>Clubes</span><strong id="clubCount">100</strong></div>
+      <div class="stat"><span>Ligas</span><strong>5</strong></div>
+      <div class="stat"><span>Fecha</span><strong id="roundStat">1/19</strong></div>
+      <div class="stat"><span>Mundiales</span><strong id="worldCount">0</strong></div>
+    </div></div>
+  </section>
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="home">Inicio</button><button class="tab" data-tab="league">Ligas</button><button class="tab" data-tab="fixtures">Partidos</button><button class="tab" data-tab="cups">Copas</button><button class="tab" data-tab="world">Mundial</button><button class="tab" data-tab="history">Historial</button><button class="tab" data-tab="clubs">Clubes</button>
+  </nav>
+  <section class="content" id="content"></section>
+</main>
+<footer>Football Universe · Simulador local · La partida se guarda en este dispositivo</footer>
+<script>
+const LEAGUE_COUNT=5, TEAM_COUNT=20;
+const seedNames=[
+["Atlético Norte","Real del Plata","Deportivo Central","Unión del Sur","Sporting Azul","Villa Imperial","Racing del Valle","Club Estrella","Ferroviarios","Nueva Córdoba","Atlético Bahía","San Martín FC","Independiente Rojo","Juventud Real","Deportivo Oeste","Los Halcones","Academia Verde","Puerto Unido","Central Andino","Estudiantes del Sol"],
+["Titanes FC","Huracán Dorado","Olimpo Unido","Nacional del Lago","Defensores FC","Sportivo Capital","Atlético del Este","Real Montaña","Barracas del Norte","Universidad FC","Deportivo Costa","La Ribera","Club Horizonte","San Lorenzo del Valle","Gimnasia Real","Los Pumas","Atlético Federal","Mineros FC","Pioneros","Deportivo Aurora"],
+["Cóndores FC","Estrella del Sur","Sporting Bahía","Atlético Serrano","Real Patagonia","Unión del Parque","Deportivo Azulgrana","Los Leones","San Miguel FC","Fénix del Oeste","Atlético Río","Juventud Andina","Central del Bosque","Deportivo Mar","Club del Faro","Racing Imperial","Atlético del Sol","Villa Norte","Náutico FC","Estudiantes del Puerto"],
+["Fortaleza FC","Deportivo Libertad","Real del Monte","Atlético Colonial","Sportivo del Río","Los Guerreros","Unión Serrana","Club del Trébol","San Pedro FC","Deportivo Pampa","Atlético Unión","Ferro del Sur","Racing del Norte","Nueva Esperanza","Real San Juan","Deportivo Laguna","Los Jaguares","Sporting del Este","Atlético del Valle","Club del Viento"],
+["Academia del Sur","Atlético Cosmos","Deportivo Estrella","Real Concordia","Unión del Horizonte","Los Dragones","Sportivo Andino","Villa del Mar","Atlético del Bosque","Club del Camino","Deportivo Sol","Racing Federal","San Gabriel FC","Los Centauros","Juventud del Lago","Atlético Frontera","Real Esperanza","Deportivo Nativo","Sporting Patagonia","Unión del Faro"]
+];
+const leagueNames=["Liga 1","Liga 2","Liga 3","Liga 4","Liga 5"];
+let state, currentTab="home", selectedLeague=0, selectedCup="libertadores";
+const $=id=>document.getElementById(id);
+function rand(n){return Math.floor(Math.random()*n)}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=rand(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+function makeState(){
+ let id=1,leagues=[];
+ for(let l=0;l<5;l++){let teams=seedNames[l].map((name,i)=>({id:id++,name,league:l,strength:Math.max(42,86-l*7+rand(19)-9),pts:0,p:0,w:0,d:0,loss:0,gf:0,ga:0}));leagues.push({teams,fixtures:makeFixtures(teams),round:0,champion:null})}
+ return {season:2026,yearIndex:0,leagues,cups:{},worlds:[],history:[],recopaHolder:null,lastRecopa:null,qualifications:null,seasonDone:false};
+}
+function makeFixtures(teams){
+ let arr=[...teams],rounds=[];
+ for(let r=0;r<19;r++){let games=[];for(let i=0;i<10;i++){let a=arr[i],b=arr[19-i];games.push({a:a.id,b:b.id,played:false,ga:null,gb:null})}rounds.push(games);arr=[arr[0],arr[19],...arr.slice(1,19)];}
+ return rounds;
+}
+function allTeams(){return state.leagues.flatMap(l=>l.teams)}
+function team(id){return allTeams().find(t=>t.id===id)}
+function resetStats(){state.leagues.forEach(l=>{l.round=0;l.champion=null;l.teams.forEach(t=>Object.assign(t,{pts:0,p:0,w:0,d:0,loss:0,gf:0,ga:0}));l.fixtures=makeFixtures(l.teams)})}
+function table(l){return [...state.leagues[l].teams].sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf||a.name.localeCompare(b.name))}
+function simulateScore(a,b){let attA=a.strength/70,attB=b.strength/70;let ga=poisson(Math.max(.2,attA*(.8+Math.random()*.55))),gb=poisson(Math.max(.2,attB*(.8+Math.random()*.55)));return [Math.min(7,ga),Math.min(7,gb)]}
+function poisson(lambda){let L=Math.exp(-lambda),k=0,p=1;do{k++;p*=Math.random()}while(p>L);return k-1}
+function playMatch(match){let a=team(match.a),b=team(match.b),[ga,gb]=simulateScore(a,b);match.played=true;match.ga=ga;match.gb=gb;[a,b].forEach(t=>{t.p++;t.gf+=t.id===a.id?ga:gb;t.ga+=t.id===a.id?gb:ga});if(ga>gb){a.pts+=3;a.w++;b.loss++}else if(gb>ga){b.pts+=3;b.w++;a.loss++}else{a.pts++;b.pts++;a.d++;b.d++}return match}
+function playRound(l){let league=state.leagues[l];if(league.round>=19)return false;league.fixtures[league.round].forEach(playMatch);league.round++;if(league.round===19){league.champion=table(l)[0].id}return true}
+function playLeagueSeason(){let more=true;while(more){more=false;for(let l=0;l<5;l++)if(playRound(l))more=true}finishSeason()}
+function drawKnockout(ids, name, meta={}){
+ let entrants=shuffle(ids),rounds=[],roundNo=1;
+ while(entrants.length>1){let games=[],winners=[];if(entrants.length%2){winners.push(entrants.pop())}
+  for(let i=0;i<entrants.length;i+=2){let a=team(entrants[i]),b=team(entrants[i+1]);let [ga,gb]=simulateScore(a,b);if(ga===gb){if(Math.random()<.5)ga++;else gb++}let winner=ga>gb?a:b;games.push({a:a.id,b:b.id,ga,gb,winner:winner.id});winners.push(winner.id)}
+  rounds.push({name:roundLabel(entrants.length+ (winners.length%2)),games});entrants=shuffle(winners);roundNo++;
+ }
+ let champ=entrants[0];return {name,champion:champ,rounds,meta};
+}
+function roundLabel(n){if(n>=100)return "Ronda preliminar";if(n>=64)return "Ronda de 64";if(n>=32)return "Dieciseisavos";if(n>=16)return "Octavos de final";if(n>=8)return "Cuartos de final";if(n>=4)return "Semifinal";return "Final"}
+function playCup(key){
+ if(key==="libertadores"){let ids=(state.qualifications?.libertadores||table(0).slice(0,16).map(t=>t.id));state.cups[key]=drawKnockout(ids,"Copa Libertadores")}
+ if(key==="league"){let ids=(state.qualifications?.league||[...table(0).slice(16,20).map(t=>t.id),...table(1).slice(0,12).map(t=>t.id)]);state.cups[key]=drawKnockout(ids,"Copa League")}
+ if(key==="nations"){state.cups[key]=drawKnockout(allTeams().map(t=>t.id),"Copa de las Naciones")}
+ if(key==="recopa"){
+  let ids=[state.recopaHolder,state.leagues[0].champion,state.cups.libertadores?.champion,state.cups.league?.champion].filter(Boolean);
+  ids=[...new Set(ids)];if(ids.length<2){toast("Primero terminá la temporada y jugá Libertadores y Copa League.");return}
+  state.cups[key]=drawKnockout(ids,"Recopa");state.lastRecopa=state.cups[key].champion;state.recopaHolder=state.lastRecopa;
+ }
+ const c=state.cups[key];if(c){state.history.push({season:state.season,name:c.name,champion:c.champion});save();render();toast(team(c.champion).name+" ganó "+c.name)}
+}
+function finishSeason(){
+ if(state.seasonDone)return;
+ // Cup qualification uses final tables; continental cups are generated after league finishes.
+ state.leagues.forEach((l,i)=>{if(!l.champion)l.champion=table(i)[0].id});
+ state.qualifications={libertadores:table(0).slice(0,16).map(t=>t.id),league:[...table(0).slice(16,20).map(t=>t.id),...table(1).slice(0,12).map(t=>t.id)]};
+ const promoted=[],relegated=[];
+ for(let l=0;l<4;l++){promoted.push(...table(l+1).slice(0,2).map(t=>t.id));relegated.push(...table(l).slice(-2).map(t=>t.id))}
+ // Exchange the bottom two with the top two in each neighboring league.
+ for(let l=0;l<4;l++){
+   const up=table(l+1).slice(0,2),down=table(l).slice(-2);
+   up.forEach(t=>{t.league=l;t.strength=Math.min(98,t.strength+3)});
+   down.forEach(t=>{t.league=l+1;t.strength=Math.max(40,t.strength-3)});
+   state.leagues[l].teams=state.leagues[l].teams.filter(t=>!down.includes(t)).concat(up);
+   state.leagues[l+1].teams=state.leagues[l+1].teams.filter(t=>!up.includes(t)).concat(down);
+ }
+ state.seasonDone=true;
+ state.history.push({season:state.season,name:"Campeón "+leagueNames[0],champion:state.leagues[0].champion});
+ state.history.push({season:state.season,name:"Ascensos y descensos",champion:null,detail:"Ascendieron 2 equipos por liga inferior; descendieron 2 por liga superior."});
+ save();render();toast("Temporada "+state.season+" terminada. Ascensos y descensos aplicados.");
+}
+function nextSeason(){
+ if(!state.seasonDone){toast("Terminá la temporada actual primero.");return}
+ state.season++;state.yearIndex++;state.seasonDone=false;state.cups={};state.qualifications=null;resetStats();
+ if(state.yearIndex%4===0)playWorldCup(true);
+ save();render();toast("Comenzó la temporada "+state.season);
+}
+function playWorldCup(silent=false){
+ const ids=shuffle(allTeams().map(t=>t.id)).slice(0,32);const cup=drawKnockout(ids,"Mundial de Clubes", {season:state.season});
+ state.worlds.push({season:state.season,champion:cup.champion,rounds:cup.rounds});state.history.push({season:state.season,name:"Mundial",champion:cup.champion});if(!silent)toast(team(cup.champion).name+" ganó el Mundial");
+}
+function save(){try{localStorage.setItem("footballUniverseSave",JSON.stringify(state));}catch(e){}}
+function load(){try{let s=localStorage.getItem("footballUniverseSave");if(s){state=JSON.parse(s);return}}catch(e){}state=makeState();save()}
+function toast(msg){let old=$("toast");if(old)old.remove();let d=document.createElement("div");d.id="toast";d.className="toast";d.textContent=msg;document.body.appendChild(d);setTimeout(()=>d.remove(),2600)}
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function teamName(id){return team(id)?.name||"Por definir"}
+function renderHeader(){ $("seasonLabel").textContent="Temporada "+state.season;$("clubCount").textContent=allTeams().length;$("roundStat").textContent=state.seasonDone?"Finalizada":Math.max(...state.leagues.map(l=>l.round)+0)+"/19";$("worldCount").textContent=state.worlds.length;$("advanceBtn").disabled=state.seasonDone;$("seasonBtn").disabled=state.seasonDone;$("heroTitle").textContent=state.seasonDone?"Temporada finalizada.":"Construí una dinastía.";$("heroText").textContent=state.seasonDone?"Revisá campeones y copas, o comenzá la próxima temporada.":"Cada partido cambia la tabla. Ascendé, evitá el descenso y conquistá el mundo."}
+function render(){renderHeader();document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===currentTab));const c=$("content");if(currentTab==="home")c.innerHTML=homeHTML();if(currentTab==="league")c.innerHTML=leagueHTML();if(currentTab==="fixtures")c.innerHTML=fixturesHTML();if(currentTab==="cups")c.innerHTML=cupsHTML();if(currentTab==="world")c.innerHTML=worldHTML();if(currentTab==="history")c.innerHTML=historyHTML();if(currentTab==="clubs")c.innerHTML=clubsHTML();bindContent()}
+function homeHTML(){
+ const t=table(0),champ=state.leagues[0].champion;
+ return `<div class="grid2"><div class="card"><div class="section-head"><div><h2>🏆 Liga 1</h2><p>Tabla de posiciones · Temporada ${state.season}</p></div><button data-goto="league">Ver tabla</button></div>${tableHTML(0,true)}</div><div class="card"><div class="section-head"><div><h2>Próxima fecha</h2><p>Partidos de Liga 1</p></div><button data-goto="fixtures">Ver partidos</button></div>${roundHTML(0)}</div><div class="card"><h2>Campeones de la temporada</h2>${champ?`<div class="item"><div><small>Campeón de Liga 1</small><strong class="champion">${safe(teamName(champ))}</strong></div><span>🏆</span></div>`:`<div class="empty">Todavía no hay campeón. Simulá las 19 fechas.</div>`}<p class="note">La Liga 1 clasifica a los 16 primeros para Libertadores. Copa League: puestos 17–20 de Liga 1 y los 12 mejores de Liga 2.</p></div><div class="card"><h2>Formato del universo</h2><div class="list"><div class="item"><div><b>5 ligas · 100 clubes</b><small>20 equipos por división</small></div><span>⚽</span></div><div class="item"><div><b>Partido único</b><small>19 fechas por temporada</small></div><span>📅</span></div><div class="item"><div><b>Ascenso y descenso</b><small>2 equipos entre cada división vecina</small></div><span>↕</span></div><div class="item"><div><b>Mundial cada 4 temporadas</b><small>32 clubes participantes</small></div><span>🌍</span></div></div></div></div>`;
+}
+function tableHTML(l,compact=false){
+ const arr=table(l);return `<div class="table-wrap"><table><thead><tr><th># / Club</th><th>Pts</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th></tr></thead><tbody>${arr.slice(0,compact?10:20).map((t,i)=>`<tr class="${i<2&&l>0?"zone":i>=18?"relegation":""}"><td class="team"><span class="pos">${i+1}</span>${safe(t.name)}</td><td><b>${t.pts}</b></td><td>${t.p}</td><td>${t.w}</td><td>${t.d}</td><td>${t.loss}</td><td>${t.gf}</td><td>${t.ga}</td><td>${t.gf-t.ga>0?"+":""}${t.gf-t.ga}</td></tr>`).join("")}</tbody></table></div>`;
+}
+function leagueHTML(){return `<div class="card"><div class="section-head"><div><h2>Tablas de posiciones</h2><p>Los dos últimos descienden; en ligas 2–5, los dos primeros ascienden.</p></div><div class="controls"><select id="leagueSelect">${leagueNames.map((n,i)=>`<option value="${i}" ${i===selectedLeague?"selected":""}>${n}</option>`).join("")}</select></div></div><div id="leagueTable">${tableHTML(selectedLeague)}</div><p class="note"><span class="pill green">Ascenso / zona alta</span> <span class="pill red">Descenso</span> · Desempate por diferencia de gol y goles a favor.</p></div>`}
+function roundHTML(l){let league=state.leagues[l],round=league.round;if(round>=19)return `<div class="empty">La temporada terminó.${league.champion?`<br><br><span class="champion">Campeón: ${safe(teamName(league.champion))}</span>`:""}</div>`;return `<div class="fixture-list">${league.fixtures[round].map(m=>`<div class="fixture"><div class="home"><b>${safe(teamName(m.a))}</b></div><div class="mid">vs</div><div class="away"><b>${safe(teamName(m.b))}</b></div></div>`).join("")}</div><p class="note">Fecha ${round+1} de 19 · Los resultados se generan al simular la fecha.</p>`}
+function fixturesHTML(){return `<div class="card"><div class="section-head"><div><h2>Calendario y resultados</h2><p>Consultá la próxima fecha o los partidos ya jugados.</p></div><div class="controls"><select id="fixtureLeague">${leagueNames.map((n,i)=>`<option value="${i}" ${i===selectedLeague?"selected":""}>${n}</option>`).join("")}</select><select id="fixtureRound">${Array.from({length:19},(_,i)=>`<option value="${i}" ${i===Math.min(state.leagues[selectedLeague].round,18)?"selected":""}>Fecha ${i+1}</option>`).join("")}</select></div></div><div id="fixtureResults">${fixtureRoundHTML(selectedLeague,Math.min(state.leagues[selectedLeague].round,18))}</div></div>`}
+function fixtureRoundHTML(l,r){let ms=state.leagues[l].fixtures[r]||[];return `<div class="fixture-list">${ms.map(m=>`<div class="fixture"><div class="home"><b>${safe(teamName(m.a))}</b></div><div class="mid">${m.played?`<strong style="color:var(--text);font-size:17px">${m.ga} - ${m.gb}</strong>`:"vs"}</div><div class="away"><b>${safe(teamName(m.b))}</b></div></div>`).join("")}</div>`}
+const cupDefs=[["libertadores","🏆","Copa Libertadores","Top 16 de Liga 1 · Eliminación directa"],["league","🌟","Copa League","Puestos 17–20 de Liga 1 + top 12 de Liga 2"],["nations","🌐","Copa de las Naciones","Los 100 clubes · Mata-mata"],["recopa","⚔️","Recopa","Campeón anterior + campeones actuales"]];
+function cupsHTML(){return `<div class="card"><div class="section-head"><div><h2>Competiciones</h2><p>Las copas se juegan una vez finalizadas las ligas.</p></div></div><div class="cup-grid">${cupDefs.map(([key,icon,name,desc])=>{let c=state.cups[key];return `<div class="cup-card"><div class="cup-icon">${icon}</div><h3>${name}</h3><p>${desc}</p>${c?`<div class="item"><div><small>Campeón ${state.season}</small><b class="champion">${safe(teamName(c.champion))}</b></div><span>🏆</span></div><button style="margin-top:10px" data-cup-detail="${key}">Ver resultados</button>`:`<button class="primary" data-playcup="${key}" ${!state.seasonDone?"disabled":""}>Jugar copa</button>`}</div>`}).join("")}</div><p class="note">La Recopa requiere que la temporada esté finalizada y que Libertadores y Copa League tengan campeón. Si un club clasifica por más de una vía, se cuentan los participantes únicos.</p><div id="cupDetail"></div></div>`}
+function cupDetailHTML(key){let c=state.cups[key];if(!c)return "";return `<div class="card" style="margin-top:14px"><h2>${safe(c.name)} · Campeón: <span class="champion">${safe(teamName(c.champion))}</span></h2>${c.rounds.map(r=>`<h3>${safe(r.name)}</h3><div class="fixture-list">${r.games.map(g=>`<div class="fixture"><div class="home"><b>${safe(teamName(g.a))}</b></div><div class="mid"><strong style="color:var(--text)">${g.ga} - ${g.gb}</strong></div><div class="away"><b>${safe(teamName(g.b))}</b></div></div>`).join("")}</div>`).join("")}</div>`}
+function worldHTML(){return `<div class="card"><div class="section-head"><div><h2>🌍 Mundial de clubes</h2><p>Se disputa cada cuatro temporadas con 32 equipos.</p></div><button class="primary" id="worldPlay" ${state.yearIndex%4!==0||state.worlds.some(w=>w.season===state.season)?"disabled":""}>Jugar mundial</button></div>${state.worlds.length?`<div class="list">${[...state.worlds].reverse().map(w=>`<div class="item"><div><small>Mundial · ${w.season}</small><strong class="champion">${safe(teamName(w.champion))}</strong></div><span>🏆</span></div>`).join("")}</div>`:`<div class="empty">Todavía no se disputó ningún mundial. Se habilita en la primera temporada y cada cuatro años de juego.</div>`}<p class="note">Regla de esta primera versión: participan 32 clubes seleccionados al azar entre los 100. El torneo se juega a eliminación directa.</p></div>`}
+function historyHTML(){return `<div class="card"><div class="section-head"><div><h2>Palmarés e historial</h2><p>Campeones registrados por temporada.</p></div><button id="exportBtn">Exportar partida</button></div>${state.history.length?`<div>${[...state.history].reverse().map(h=>`<div class="history-row"><div><b>${safe(h.name)}</b><div class="small">Temporada ${h.season}</div></div><div class="${h.champion?"champion":""}">${h.champion?"🏆 "+safe(teamName(h.champion)):safe(h.detail||"")}</div></div>`).join("")}</div>`:`<div class="empty">Todavía no hay resultados históricos. Simulá tu primera temporada.</div>`}</div>`}
+function clubsHTML(){return `<div class="card"><div class="section-head"><div><h2>Clubes</h2><p>Buscá equipos y editá sus nombres. Los cambios se guardan en esta partida.</p></div><input id="clubSearch" placeholder="Buscar club..." /></div><div class="table-wrap"><table><thead><tr><th>Club</th><th>Liga actual</th><th>Fuerza</th><th>Editar</th></tr></thead><tbody id="clubRows">${clubRows("")}</tbody></table></div><p class="note">La fuerza (40–98) influye en los resultados simulados. Cambiar un nombre no altera sus estadísticas.</p></div>`}
+function clubRows(q){return allTeams().filter(t=>t.name.toLowerCase().includes(q.toLowerCase())).sort((a,b)=>a.league-b.league||a.name.localeCompare(b.name)).map(t=>`<tr><td class="team">${safe(t.name)}</td><td>${leagueNames[t.league]}</td><td><input type="number" min="40" max="98" value="${t.strength}" data-strength="${t.id}" style="width:75px;padding:6px"></td><td><button data-rename="${t.id}">Renombrar</button></td></tr>`).join("")}
+function bindContent(){
+ document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>{currentTab=b.dataset.goto;render()});
+ const ls=$("leagueSelect");if(ls)ls.onchange=()=>{selectedLeague=+ls.value;$("leagueTable").innerHTML=tableHTML(selectedLeague)};
+ const fl=$("fixtureLeague"),fr=$("fixtureRound");if(fl)fl.onchange=()=>{selectedLeague=+fl.value;fr.innerHTML=Array.from({length:19},(_,i)=>`<option value="${i}">Fecha ${i+1}</option>`).join("");fr.value=Math.min(state.leagues[selectedLeague].round,18);$("fixtureResults").innerHTML=fixtureRoundHTML(selectedLeague,+fr.value)};if(fr)fr.onchange=()=>$("fixtureResults").innerHTML=fixtureRoundHTML(selectedLeague,+fr.value);
+ document.querySelectorAll("[data-playcup]").forEach(b=>b.onclick=()=>playCup(b.dataset.playcup));
+ document.querySelectorAll("[data-cup-detail]").forEach(b=>b.onclick=()=>{let d=$("cupDetail");d.innerHTML=cupDetailHTML(b.dataset.cupDetail);d.scrollIntoView({behavior:"smooth",block:"start"})});
+ const wp=$("worldPlay");if(wp)wp.onclick=()=>{playWorldCup();save();render()};
+ const cs=$("clubSearch");if(cs)cs.oninput=()=>{$("clubRows").innerHTML=clubRows(cs.value);bindClubButtons()};
+ bindClubButtons();
+ const ex=$("exportBtn");if(ex)ex.onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="football-universe-partida.json";a.click();URL.revokeObjectURL(a.href)};
+}
+function bindClubButtons(){document.querySelectorAll("[data-rename]").forEach(b=>b.onclick=()=>{let t=team(+b.dataset.rename),n=prompt("Nuevo nombre del club:",t.name);if(n&&n.trim()){t.name=n.trim().slice(0,36);save();render()}});document.querySelectorAll("[data-strength]").forEach(i=>i.onchange=()=>{team(+i.dataset.strength).strength=Math.max(40,Math.min(98,+i.value||40));save()})}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{currentTab=b.dataset.tab;render()});
+$("advanceBtn").onclick=()=>{let played=0;for(let l=0;l<5;l++)if(state.leagues[l].round<19){playRound(l);played++}if(state.leagues.every(l=>l.round===19))finishSeason();else{save();render();toast("Fecha simulada en "+played+" ligas.")}};
+$("seasonBtn").onclick=()=>{playLeagueSeason()};
+$("saveBtn").onclick=()=>{save();toast("Partida guardada en este dispositivo.")};
+$("resetBtn").onclick=()=>{if(confirm("¿Crear una nueva partida? Se perderá la partida guardada en este dispositivo.")){state=makeState();currentTab="home";save();render();toast("Nueva partida creada.")}};
+load();render();
+</script>
+</body>
+</html>
