@@ -1,9 +1,11 @@
 FOOTBALL UNIVERSE
 
-El juego incluye los 100 países indicados, agrupados en 5 ligas de 20 países.
-La división inicial es una estimación por nivel futbolístico, no un ranking oficial.
+La partida comienza en el año 1802.
+Cada temporada se avanza al año siguiente. El ranking histórico acumula puntos por títulos.
+
+Puntos: Liga 1 50; Liga 2 40; Liga 3 30; Liga 4 15; Liga 5 1; Libertadores 40; Copa League 20; Copa de las Naciones 5; Recopa 20; Mundial 100.
 
 1. Extrae la carpeta football-universe.
-2. Abre index.html en un navegador para jugar.
+2. Abre index.html en un navegador.
 3. La partida se guarda en el almacenamiento local del navegador.
-4. Puedes editar nombres y fuerza desde la pestaña Países.
+4. El ranking y los campeones se conservan entre temporadas.
