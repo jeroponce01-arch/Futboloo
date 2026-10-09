@@ -1,7 +1,9 @@
 FOOTBALL UNIVERSE
 
+El juego incluye los 100 países indicados, agrupados en 5 ligas de 20 países.
+La división inicial es una estimación por nivel futbolístico, no un ranking oficial.
+
 1. Extrae la carpeta football-universe.
 2. Abre index.html en un navegador para jugar.
 3. La partida se guarda en el almacenamiento local del navegador.
-
-Incluye 5 ligas, 100 clubes, ascensos/descensos, copas eliminatorias y mundial.
+4. Puedes editar nombres y fuerza desde la pestaña Países.
