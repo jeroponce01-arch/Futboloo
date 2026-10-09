@@ -1,11 +1,8 @@
 FOOTBALL UNIVERSE
 
-La partida comienza en el año 1802.
-Cada temporada se avanza al año siguiente. El ranking histórico acumula puntos por títulos.
+La partida comienza en 1802.
+Para terminar una temporada, pulsa 'Simular temporada completa' o simula las fechas.
+Cuando la temporada esté finalizada, pulsa 'Siguiente año' para avanzar al año siguiente.
+El ranking histórico y el historial de campeones se conservan.
 
-Puntos: Liga 1 50; Liga 2 40; Liga 3 30; Liga 4 15; Liga 5 1; Libertadores 40; Copa League 20; Copa de las Naciones 5; Recopa 20; Mundial 100.
-
-1. Extrae la carpeta football-universe.
-2. Abre index.html en un navegador.
-3. La partida se guarda en el almacenamiento local del navegador.
-4. El ranking y los campeones se conservan entre temporadas.
+Puntuación: Liga 1 50; Liga 2 40; Liga 3 30; Liga 4 15; Liga 5 1; Libertadores 40; Copa League 20; Copa de las Naciones 5; Recopa 20; Mundial 100.

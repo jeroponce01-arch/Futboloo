@@ -34,7 +34,7 @@ footer{text-align:center;color:#687b96;font-size:11px;padding:15px}
       <div class="season-label" id="seasonLabel">Temporada 1802</div>
       <h2 id="heroTitle">Construí una dinastía.</h2>
       <p id="heroText">Simulá temporadas, ganá copas y llevá a tus clubes a la gloria.</p>
-      <div class="hero-buttons"><button class="primary" id="advanceBtn">Simular próxima fecha</button><button id="seasonBtn">Simular temporada completa</button></div>
+      <div class="hero-buttons"><button class="primary" id="advanceBtn">Simular próxima fecha</button><button id="seasonBtn">Simular temporada completa</button><button class="primary" id="nextYearBtn" disabled>Siguiente año →</button></div>
     </div>
     <div class="card"><div class="stats">
       <div class="stat"><span>Países</span><strong id="clubCount">100</strong></div>
@@ -135,7 +135,7 @@ function finishSeason(){
  save();render();toast("Temporada "+state.season+" terminada. Ascensos y descensos aplicados.");
 }
 function nextSeason(){
- if(!state.seasonDone){toast("Terminá la temporada actual primero.");return}
+ if(!state.seasonDone){toast("Primero terminá las 19 fechas de la temporada.");return}
  state.season++;state.yearIndex++;state.seasonDone=false;state.cups={};state.qualifications=null;resetStats();
  if(state.yearIndex%4===0)playWorldCup(true);
  save();render();toast("Comenzó la temporada "+state.season);
@@ -149,7 +149,7 @@ function load(){try{let s=localStorage.getItem("footballUniverseSave");if(s){sta
 function toast(msg){let old=$("toast");if(old)old.remove();let d=document.createElement("div");d.id="toast";d.className="toast";d.textContent=msg;document.body.appendChild(d);setTimeout(()=>d.remove(),2600)}
 function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function teamName(id){return team(id)?.name||"Por definir"}
-function renderHeader(){ $("seasonLabel").textContent="Temporada "+state.season;$("clubCount").textContent=allTeams().length;$("roundStat").textContent=state.seasonDone?"Finalizada":Math.max(...state.leagues.map(l=>l.round)+0)+"/19";$("worldCount").textContent=state.worlds.length;$("advanceBtn").disabled=state.seasonDone;$("seasonBtn").disabled=state.seasonDone;$("heroTitle").textContent=state.seasonDone?"Temporada finalizada.":"Construí una dinastía.";$("heroText").textContent=state.seasonDone?"Revisá campeones y copas, o comenzá la próxima temporada.":"Cada partido cambia la tabla. Ascendé, evitá el descenso y conquistá el mundo."}
+function renderHeader(){ $("seasonLabel").textContent="Temporada "+state.season;$("clubCount").textContent=allTeams().length;$("roundStat").textContent=state.seasonDone?"Finalizada":Math.max(...state.leagues.map(l=>l.round)+0)+"/19";$("worldCount").textContent=state.worlds.length;$("advanceBtn").disabled=state.seasonDone;$("seasonBtn").disabled=state.seasonDone;const ny=$("nextYearBtn");if(ny)ny.disabled=!state.seasonDone;$("heroTitle").textContent=state.seasonDone?"Temporada finalizada.":"Construí una dinastía.";$("heroText").textContent=state.seasonDone?"Revisá campeones y copas, o comenzá la próxima temporada.":"Cada partido cambia la tabla. Ascendé, evitá el descenso y conquistá el mundo."}
 function render(){renderHeader();document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===currentTab));const c=$("content");if(currentTab==="home")c.innerHTML=homeHTML();if(currentTab==="league")c.innerHTML=leagueHTML();if(currentTab==="fixtures")c.innerHTML=fixturesHTML();if(currentTab==="cups")c.innerHTML=cupsHTML();if(currentTab==="world")c.innerHTML=worldHTML();if(currentTab==="history")c.innerHTML=historyHTML();if(currentTab==="ranking")c.innerHTML=rankingHTML();if(currentTab==="clubs")c.innerHTML=clubsHTML();bindContent()}
 function homeHTML(){
  const t=table(0),champ=state.leagues[0].champion;
@@ -188,7 +188,8 @@ function bindContent(){
 function bindClubButtons(){document.querySelectorAll("[data-rename]").forEach(b=>b.onclick=()=>{let t=team(+b.dataset.rename),n=prompt("Nuevo nombre del club:",t.name);if(n&&n.trim()){t.name=n.trim().slice(0,36);save();render()}});document.querySelectorAll("[data-strength]").forEach(i=>i.onchange=()=>{team(+i.dataset.strength).strength=Math.max(40,Math.min(98,+i.value||40));save()})}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{currentTab=b.dataset.tab;render()});
 $("advanceBtn").onclick=()=>{let played=0;for(let l=0;l<5;l++)if(state.leagues[l].round<19){playRound(l);played++}if(state.leagues.every(l=>l.round===19))finishSeason();else{save();render();toast("Fecha simulada en "+played+" ligas.")}};
-$("seasonBtn").onclick=()=>{playLeagueSeason()};
+$("seasonBtn").onclick=()=>{playLeagueSeason();render()};
+$("nextYearBtn").onclick=()=>{nextSeason()};
 $("saveBtn").onclick=()=>{save();toast("Partida guardada en este dispositivo.")};
 $("resetBtn").onclick=()=>{if(confirm("¿Crear una nueva partida? Se perderá la partida guardada en este dispositivo.")){state=makeState();currentTab="home";save();render();toast("Nueva partida creada.")}};
 load();render();
